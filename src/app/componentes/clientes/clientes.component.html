@@ -145,14 +145,14 @@
               #email="ngModel"
               [(ngModel)]="cliente.email"
               [ngClass]="{ 'is-invalid': email.errors && email.touched }"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
               required
-              minlength="2"
             />
             <div [hidden]="!email.errors?.required" class="invalid-feedback">
               Email requerido
             </div>
-            <div [hidden]="!email.errors?.minlength" class="invalid-feedback">
-              Debe contener al menos 2 caracteres
+            <div [hidden]="!email.errors?.pattern" class="invalid-feedback">
+              Email no valido
             </div>
           </div>
 
@@ -162,7 +162,14 @@
               type="number"
               name="saldo"
               class="form-control"
+              #saldo="ngModel"
+              [(ngModel)]="cliente.saldo"
+              [ngClass]="{ 'is-invalid': saldo.errors && saldo.touched }"
+              required
             />
+            <div [hidden]="!saldo.errors?.required" class="invalid-feedback">
+              Saldo requerido
+            </div>
           </div>
 
           <div class="modal-footer">
