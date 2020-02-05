@@ -21,4 +21,19 @@ export class ClientesComponent implements OnInit {
     );
   }
 
+  getSaldoTotal() {
+    let saldoTotal: number = 0;
+
+    if (this.clientes != null) {
+      /*this.clientes.forEach(
+        cliente => {
+          saldoTotal += cliente.saldo;
+        }
+      );*/
+
+      saldoTotal = this.clientes.reduce((total, actual) => total + actual.saldo, 0);
+    }
+    return saldoTotal;
+  }
+
 }
