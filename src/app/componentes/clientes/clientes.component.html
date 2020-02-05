@@ -38,7 +38,7 @@
               <tr *ngFor="let cliente of clientes; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
-                <td>{{ cliente.saldo | currency: 'USD':'$' }}</td>
+                <td>{{ cliente.saldo | currency: "USD":"$" }}</td>
                 <td>
                   <a
                     routerLink="/cliente/editar/{{ cliente.id }}"
@@ -59,7 +59,7 @@
           <div class="card-body">
             <h3>Saldo Total</h3>
             <h4 class="display-4">
-              {{ getSaldoTotal() | currency: 'USD':'$' }}
+              {{ getSaldoTotal() | currency: "USD":"$" }}
             </h4>
           </div>
         </div>
@@ -72,8 +72,49 @@
             </h4>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
+
+<!-- Agregar cliente modal -->
+
+<div class="modal fade" id="agregarClienteModal">
+  <div class="modal-dialog modl-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar Cliente</h5>
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="saldo">Saldo</label>
+            <input type="number" name="saldo" class="form-control" />
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
