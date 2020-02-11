@@ -1,3 +1,4 @@
+import { LoginService } from './servicios/login.service';
 import { ClienteServicio } from './servicios/cliente.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,7 +43,7 @@ import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.componen
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ClienteServicio],
+  providers: [ClienteServicio, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
