@@ -31,4 +31,8 @@ export class CabeceroComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  registrarse() {
+    this.router.navigate(['/registrarse']);
+  }
+
 }
