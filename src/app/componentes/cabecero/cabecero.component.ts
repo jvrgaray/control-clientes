@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LoginService } from './../../servicios/login.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CabeceroComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn: boolean;
+  loggedInUser: string;
+
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
+    this.loginService.getAuth().subscribe(auth => {
+      if (auth) {
+        this.isLoggedIn = true;
+        this.loggedInUser = auth.email;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 }
