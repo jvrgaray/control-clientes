@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Cliente } from 'src/app/modelo/cliente.model';
+import { ClienteServicio } from 'src/app/servicios/cliente.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -6,10 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar-cliente.component.css']
 })
 export class EditarClienteComponent implements OnInit {
+  clientes: Cliente[];
+  cliente: Cliente = {
+    nombre: '',
+    apellido: '',
+    email: '',
+    saldo: 0
+  };
 
-  constructor() { }
+  id: string;
+
+  constructor(private clientesServicio: ClienteServicio,
+    private flashMessage: FlashMessagesService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+    this.clientesServicio.getCliente(this.id).subscribe(cliente => {
+      this.cliente = cliente;
+    });
   }
 
 }
