@@ -1,3 +1,5 @@
+import { Configuracion } from './../../modelo/configuracion.model';
+import { ConfiguracionServicio } from './../../servicios/configuracion.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,12 +11,19 @@ import { Component, OnInit } from '@angular/core';
 export class ConfiguracionComponent implements OnInit {
   permitirRegistro = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private configuracionServicio: ConfiguracionServicio) { }
 
   ngOnInit() {
+    this.configuracionServicio.getConfiguracion().subscribe(
+      (configuracion: Configuracion) => {
+        this.permitirRegistro = configuracion.permitirRegistro;
+      }
+    );
   }
 
   guardar() {
-
+    const configuracion: Configuracion = { permitirRegistro: this.permitirRegistro };
+    this.configuracionServicio.modificarConfiguracion(configuracion);
+    this.router.navigate(['/']);
   }
 }
